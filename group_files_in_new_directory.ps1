@@ -1,5 +1,4 @@
-$filesToGroup = (Get-ChildItem (Get-Item .).FullName -Filter "*.CDR" | #change extension before use 
-Group {$_.LastWriteTime.ToString("yyyy-MM")})
+$filesToGroup = (Get-ChildItem (Get-Item .).FullName -Filter "*.CDR" |  Group {$_.LastWriteTime.ToString("yyyy-MM")})
 
 foreach ($f in $filesToGroup) {
     mkdir $f.Name
