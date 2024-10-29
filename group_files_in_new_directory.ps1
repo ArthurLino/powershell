@@ -1,8 +1,12 @@
-$filesToGroup = (Get-ChildItem (Get-Item .).FullName -Filter "*.CDR" | #change extension before use 
-Group {$_.LastWriteTime.ToString("yyyy-MM")})
+$filesToGroup = (Get-ChildItem -File | Group-Object {$_.LastWriteTime.ToString("yyyy-MM")})
 
 foreach ($f in $filesToGroup) {
-    mkdir $f.Name
+    if (Test-Path $f.name) {
+        Write-Host "Folder already exists."
+    }
+    else {
+        New-Item -ItemType Directory -Path $f.Name
+    }
 }
 
 foreach ($f in $filesToGroup) {
